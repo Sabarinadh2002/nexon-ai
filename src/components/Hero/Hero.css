@@ -1,0 +1,29 @@
+/* src/components/Hero/Hero.css */
+.hero-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; /* Adjust height as needed */
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-content {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: #A0AEC0;
+    margin-top: 0.5rem;
+}

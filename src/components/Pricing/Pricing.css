@@ -1,0 +1,102 @@
+/* src/components/Pricing/Pricing.css */
+.pricing-section {
+    padding: 4rem 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background: #1A1A1A;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    width: 320px;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.pricing-card:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.pricing-card.featured {
+    border-color: #377DFF;
+    box-shadow: 0 0 25px -5px #377DFF;
+}
+
+.card-content {
+    padding: 2rem;
+    color: white;
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.featured-badge {
+    background: #377DFF;
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.plan-price {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 1.5rem 0;
+}
+.plan-price sup, .plan-price sub {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #A0AEC0;
+}
+
+.get-started-btn {
+    width: 100%;
+    background: #377DFF;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.get-started-btn:hover {
+    background: #2b6ad9;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    text-align: left;
+}
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #A0AEC0;
+    margin-bottom: 0.75rem;
+}
+.features-list li svg {
+    color: #377DFF;
+}

@@ -1,0 +1,143 @@
+
+/* src/components/DemoSection/DemoSection.css */
+
+.demo-section-container {
+    background-color: rgba(10, 10, 15, 0.85);
+    padding: 4rem 2rem;
+    margin: 5rem 0;
+    position: relative;
+    z-index: 10;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.demo-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.demo-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.demo-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem 2rem;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.demo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1.25rem;
+}
+
+.demo-card {
+    background-color: #19181b;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    position: relative;
+    overflow: hidden;
+
+    /* --- NEW: Added transparent white border --- */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Shine effect styles remain the same */
+.demo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(14, 255, 126, 0.2),
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: left 0.6s;
+    pointer-events: none;
+}
+
+.demo-card:hover::before {
+    left: 125%;
+}
+
+.card-icon {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+}
+
+.demo-card h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    margin-top: 0;
+    line-height: 1.4;
+}
+
+.demo-card p {
+    color: #A0AEC0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.cta-box {
+    background-color: transparent;
+    border: 1px solid #48bb78;
+    border-radius: 0.5rem;
+    padding: 0.8rem;
+    margin-top: 1rem;
+}
+
+.cta-box p {
+    color: white;
+    font-size: 0.85rem;
+    margin: 0 0 0.75rem 0;
+}
+
+/* This style ensures the button is always visible and correctly styled */
+.cta-button-demo {
+    background-color: transparent;
+    border: 1px solid #48bb78;
+    color: #48bb78;
+    padding: 0.6rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.cta-button-demo:hover {
+    background-color: #48bb78;
+    color: #19181b;
+}
+
+/* Responsive adjustments
+@media (max-width: 1200px) {
+    .demo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+} */
+
+@media (max-width: 768px) {
+    .demo-grid {
+        grid-template-columns: 1fr;
+    }
+}

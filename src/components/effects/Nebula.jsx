@@ -11,6 +11,7 @@ export default function Nebula() {
     const shaderMaterial = new THREE.ShaderMaterial({
         uniforms: {
             u_time: { value: 0 },
+            u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }, // <-- ADD THIS
             u_noiseScale: { value: cfg.noiseScale },
             u_color1: { value: cfg.color1 },
             u_color2: { value: cfg.color2 },
