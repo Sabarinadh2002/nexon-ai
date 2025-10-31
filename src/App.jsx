@@ -40,7 +40,7 @@ function App() {
         
         {/* --- Section 2: YouTube Video --- */}
         <div style={{ width: '100%', maxWidth: '900px', margin: '0 auto 5rem auto' }}>
-          <VideoPlayer embedId={youtubeVideoId} />
+          {/* <VideoPlayer embedId={youtubeVideoId} /> */}
         </div>
         
         {/* --- Section 3 & 4: Deployments and Pricing --- */}
