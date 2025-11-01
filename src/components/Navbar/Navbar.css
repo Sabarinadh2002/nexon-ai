@@ -1,24 +1,29 @@
 /* src/components/Navbar/Navbar.css */
 
 .navbar-container {
-    position: fixed;
-    top: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    z-index: 1000;
-    
-    /* --- Increased Transparency --- */
-    background-color: rgba(10, 10, 15, 0.5); /* Changed from 0.7 to 0.5 */
-    
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Made border fainter */
-    border-radius: 0.75rem;
-    padding: 0.8rem 1.5rem;
-    
-    -webkit-backdrop-filter: blur(12px); /* Slightly increased blur */
-    backdrop-filter: blur(12px);
-    
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 75%;
+  height: 4vh; /* or set to a pixel value like 56px if preferred */
+  z-index: 1000;
+  background-color: rgba(10, 10, 15, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 0.8rem 1.5rem;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  /* width, opacity, and transition remain controlled inline from your JSX */
+}
+
+.navbar-svg-logo {
+  height: 2rem;
+  width: auto;
+  display: block;
 }
 
 .navbar {
