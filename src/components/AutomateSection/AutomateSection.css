@@ -1,0 +1,85 @@
+/* src/components/AutomateSection/AutomateSection.css */
+
+.automate-section-container {
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    color: white;
+}
+
+.wavy-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+}
+
+.automate-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.automate-subtitle {
+    color: #A0AEC0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+}
+
+.automate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.automate-card {
+    background-color: #070606c8; /* The requested card color 292b34 */
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.automate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.automate-card-icon {
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    width: 24px;
+    height: 24px;
+    color: #A0AEC0;
+}
+
+.automate-card p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .automate-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .automate-grid {
+        grid-template-columns: 1fr;
+    }
+    .automate-card {
+        text-align: center;
+        flex-direction: column;
+    }
+}

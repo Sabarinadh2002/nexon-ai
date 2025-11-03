@@ -1,0 +1,96 @@
+/* src/components/FlexibleCover/FlexibleCover.css */
+
+/* This wrapper creates the decorative lines and spacing */
+.cover-wrapper {
+    position: relative;
+    padding: 6rem 2rem; /* Creates space for the lines */
+    margin-top: 4rem;
+    background-color: #ffffff; /* Light grey background */
+
+    width: 100vw;
+    box-sizing: border-box; /* Ensures padding is included in the width */
+    /* This calc() trick pulls the container to the screen edges */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.cover-wrapper::before,
+.cover-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: #e2e8f0; /* A slightly darker grey for the lines */
+    border-radius: 2px;
+}
+
+.cover-wrapper::before {
+    top: 0; /* Line before the section */
+}
+
+.cover-wrapper::after {
+    bottom: 0; /* Line after the section */
+}
+
+/* This container holds the content and centers it */
+.flexible-cover-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    color: #1a202c; /* Dark text color for readability */
+}
+
+.cover-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cover-header p {
+    font-size: 1.1rem;
+    color: #4a5568;
+    max-width: 550px;
+    margin: 0 auto 3rem auto;
+}
+
+.flexible-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.cover-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.cover-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6B46C1; /* Purple color for icons */
+    margin-bottom: 1rem;
+}
+
+.cover-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.cover-card p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .flexible-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,87 @@
+/* src/components/FaqSection.css */
+
+.faq-container {
+    max-width: 800px;
+    margin: 6rem auto;
+    padding: 2rem;
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+
+.faq-header {
+    margin-bottom: 2.5rem;
+}
+
+.faq-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.faq-header p {
+    color: #A0AEC0;
+    margin: 0.25rem 0;
+}
+
+.faq-header a {
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 0;
+    cursor: pointer;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #CBD5E0;
+    transition: color 0.3s ease;
+}
+
+.faq-item:hover .faq-question {
+    color: white;
+}
+
+.faq-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #2D3748;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    color: #A0AEC0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding-top 0.4s ease;
+    padding-top: 0;
+    line-height: 1.6;
+}
+
+/* Styles for when the FAQ item is open */
+.faq-item.open .faq-answer {
+    max-height: 200px; /* Adjust if your answers are longer */
+    padding-top: 1rem;
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(90deg);
+}

@@ -1,0 +1,14 @@
+/* src/components/SectionWrapper.css */
+
+.section-wrapper {
+    background-color: rgba(10, 10, 15, 0.85); /* Black transparent box */
+    padding: 6rem 2rem;
+    position: relative;
+    z-index: 10;
+    
+    /* Full-width background styles */
+    margin: 6rem 0;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
