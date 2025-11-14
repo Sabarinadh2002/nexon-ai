@@ -14,6 +14,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // --- NEW: Smooth scroll function ---
+  const scrollToFeatures = (e) => {
+    e.preventDefault();
+    const element = document.getElementById('features-section');
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   // Configurable thresholds for each stage
   const stage2Scroll = 10;    // when fading in starts
   const stage3Scroll = 48;   // when fully opaque at 30% width
@@ -39,15 +51,16 @@ export default function Navbar() {
       >
         <nav className="navbar">
           <div className="navbar-left">
-            {/* <img src="public\Logo.svg" alt="Logo" className="navbar-svg-logo" height={32} /> */}
+            {/* Logo hidden in stage 2 */}
           </div>
           <div className="navbar-links">
-                    <a href="#features">Features</a>
-                    <a href="#pricing">Demo</a>
-                    <a href="#contact">Pricing</a>
-                </div>
+            {/* --- UPDATED: Add onClick handler --- */}
+            <a href="#features" onClick={scrollToFeatures}>Features</a>
+            <a href="#pricing">Demo</a>
+            <a href="#contact">Pricing</a>
+          </div>
           <div className="navbar-right">
-            {/* <a href="/login" className="login-link">Contact</a> */}
+            {/* Contact hidden in stage 2 */}
           </div>
         </nav>
       </div>
@@ -55,7 +68,6 @@ export default function Navbar() {
   }
 
   // Stage 3/4/5: Opaque, width expands from 30% to 100%
-  // Calculates percentage width based on |stage4Scroll, stage5Scroll|
   let width = '20%';
   if (scrollY >= stage4Scroll && scrollY < stage5Scroll) {
     const expandRatio = (scrollY - stage4Scroll) / (stage5Scroll - stage4Scroll);
@@ -73,19 +85,20 @@ export default function Navbar() {
         transition: 'width 0.5s cubic-bezier(.47,1.64,.41,.8), opacity 0.35s'
       }}
     >
-        <nav className="navbar">
-          <div className="navbar-left">
-            <img src="public\Logo.svg" alt="Logo" className="navbar-svg-logo" height={32} />
-          </div>
-          <div className="navbar-links">
-                    <a href="#features">Features</a>
-                    <a href="#pricing">Demo</a>
-                    <a href="#contact">Pricing</a>
-                </div>
-          <div className="navbar-right">
-            <a href="/login" className="login-link">Contact</a>
-          </div>
-        </nav>
+      <nav className="navbar">
+        <div className="navbar-left">
+          <img src="/Logo.svg" alt="Logo" className="navbar-svg-logo" height={32} />
+        </div>
+        <div className="navbar-links">
+          {/* --- UPDATED: Add onClick handler --- */}
+          <a href="#features" onClick={scrollToFeatures}>Features</a>
+          <a href="#pricing">Demo</a>
+          <a href="#contact">Pricing</a>
+        </div>
+        <div className="navbar-right">
+          <a href="/login" className="login-link">Contact</a>
+        </div>
+      </nav>
     </div>
   );
 }

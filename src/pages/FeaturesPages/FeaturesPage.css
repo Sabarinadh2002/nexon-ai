@@ -1,0 +1,191 @@
+/* src/pages/FeaturesPage/FeaturesPage.css */
+
+.features-page-wrapper {
+    min-height: 100vh;
+    background-color: #f3f4f6;
+}
+
+.features-page-main {
+    padding-top: 100px;
+}
+
+/* Hero Section */
+.features-hero-section {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.features-hero-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+}
+
+.features-hero-section p {
+    font-size: 1.1rem;
+    color: #6b7280;
+    line-height: 1.8;
+}
+
+.features-hero-section .highlight {
+    color: #6d28d9;
+    font-weight: 600;
+}
+
+/* Main Features Grid */
+.main-features-section {
+    padding: 3rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr; /* Make all rows the same height */
+    gap: 2rem;
+}
+
+.main-feature-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Make card fill the grid cell */
+}
+
+.main-feature-card.expanded {
+    grid-column: span 2;
+}
+
+.main-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: white;
+}
+
+.feature-icon {
+    font-size: 2rem;
+}
+
+.feature-card-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.feature-card-content {
+    flex-grow: 1; /* Allow content to grow */
+    min-height: 400px; /* Set a minimum height */
+    position: relative;
+}
+
+.feature-card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.feature-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+
+    transform: scale(1.1); /* Example: 115% zoom */
+    transition: transform 0.3s ease;
+
+    object-position: center 30%;
+}
+
+/* Additional Features Section */
+.additional-features-section {
+    padding: 2rem 2rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.additional-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.additional-feature-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.additional-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.additional-feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.additional-feature-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.additional-feature-card p {
+    font-size: 0.95rem;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .main-features-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto; /* Reset row height for single column */
+    }
+    
+    .main-feature-card.expanded {
+        grid-column: span 1;
+    }
+
+    .additional-features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .features-hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .feature-card-content {
+        min-height: 300px;
+    }
+    
+    .additional-features-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -83,3 +83,39 @@
         flex-direction: column;
     }
 }
+
+.see-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.see-more-button {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 0.875rem 2rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.see-more-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.see-more-button .arrow {
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+}
+
+.see-more-button:hover .arrow {
+    transform: translateX(4px);
+}

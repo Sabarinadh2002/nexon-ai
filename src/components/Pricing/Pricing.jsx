@@ -1,43 +1,142 @@
 // src/components/Pricing/Pricing.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import './Pricing.css';
 
-const pricingPlans = [
-    { title: 'Hobby', price: '99', features: ['Access to basic analytics', 'Up to 10,000 data points', 'Email support', 'Cancel anytime'] },
-    { title: 'Starter', price: '299', features: ['Advanced analytics', 'Customizable reports', 'Real-time data tracking', 'Everything in Hobby'], featured: true },
-    { title: 'Pro', price: '1490', features: ['Unlimited data storage', 'AI-powered insights', 'Advanced data segmentation', 'Everything in Starter'] }
+// A detailed data structure for all pricing plans
+const plans = [
+  {
+    name: 'Essential',
+    monthlyPrice: 14.95,
+    annualPrice: 12.95,
+    trialDays: 30,
+    isPopular: false,
+    features: [
+      { text: '2 charts per tab', included: true },
+      { text: '5 indicators per chart', included: true },
+      { text: '10k historical bars', included: true },
+      { text: '10 parallel chart connections', included: true },
+      { text: '20 price alerts', included: true },
+      { text: '0 watchlist alerts', included: false },
+      // ... more features can be added here
+    ]
+  },
+  {
+    name: 'Plus',
+    monthlyPrice: 33.95,
+    annualPrice: 29.95,
+    trialDays: 30,
+    isPopular: false,
+    features: [
+      { text: '4 charts per tab', included: true },
+      { text: '10 indicators per chart', included: true },
+      { text: '10k historical bars', included: true },
+      { text: '20 parallel chart connections', included: true },
+      { text: '100 price alerts', included: true },
+      { text: '0 watchlist alerts', included: false },
+       // ... more features can be added here
+    ]
+  },
+  {
+    name: 'Premium',
+    monthlyPrice: 67.95,
+    annualPrice: 59.95,
+    trialDays: 30,
+    isPopular: true,
+    features: [
+      { text: '8 charts per tab', included: true },
+      { text: '25 indicators per chart', included: true },
+      { text: '20k historical bars', included: true },
+      { text: '50 parallel chart connections', included: true },
+      { text: '400 price alerts', included: true },
+      { text: '2 watchlist alerts', included: true },
+       // ... more features can be added here
+    ]
+  },
+  {
+    name: 'Ultimate',
+    monthlyPrice: 239.95,
+    annualPrice: 199.95,
+    trialDays: 7,
+    isPopular: false,
+    features: [
+      { text: '16 charts per tab', included: true },
+      { text: '50 indicators per chart', included: true },
+      { text: '40k historical bars', included: true },
+      { text: '200 parallel chart connections', included: true },
+      { text: '1,000 price alerts', included: true },
+      { text: '15 watchlist alerts', included: true },
+       // ... more features can be added here
+    ]
+  }
 ];
 
-const CheckIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-);
-
 export default function Pricing() {
+    const [billingCycle, setBillingCycle] = useState('monthly');
+
     return (
-        <div className="pricing-section">
+        <section className="pricing-section">
+            
+            <div className="pricing-header">
+                <h1>Plans for every level of ambition</h1>
+                <div className="billing-toggle">
+                    <button 
+                        className={billingCycle === 'monthly' ? 'active' : ''}
+                        onClick={() => setBillingCycle('monthly')}
+                    >
+                        Monthly
+                    </button>
+                    <button 
+                        className={billingCycle === 'annually' ? 'active' : ''}
+                        onClick={() => setBillingCycle('annually')}
+                    >
+                        Annually
+                    </button>
+                    <span className="save-badge">Save up to 17%</span>
+                </div>
+            </div>
+
             <div className="pricing-grid">
-                {pricingPlans.map((plan, index) => (
-                    <div key={index} className={`pricing-card ${plan.featured ? 'featured' : ''}`}>
-                        <div className="card-content">
-                            <div className="plan-header">
-                               <h3>{plan.title}</h3>
-                                {plan.featured && <span className="featured-badge">Featured</span>}
+                {plans.map((plan, index) => (
+                    <div key={index} className={`pricing-card ${plan.isPopular ? 'popular' : ''}`}>
+                        <div className="card-header">
+                            <h3>{plan.name}</h3>
+                            <div className="price">
+                                <span className="price-currency">£</span>
+                                <span className="price-amount">
+                                    {billingCycle === 'monthly' ? plan.monthlyPrice.toFixed(2) : plan.annualPrice.toFixed(2)}
+                                </span>
+                                <span className="price-period">/mo</span>
                             </div>
-                            <div className="plan-price">
-                                <sup>$</sup>{plan.price}<sub>/month</sub>
-                            </div>
-                            <button className="get-started-btn">Get {plan.title}</button>
+                            <p className="billing-info">billed {billingCycle}</p>
+                        </div>
+                        <div className="card-body">
+                            <button className="try-button">Try free for {plan.trialDays} days</button>
+                            <a href="#" className="pay-link">
+                                {plan.name === 'Ultimate' ? 'or get in touch for enterprise solutions' : 'or skip trial and pay now'}
+                            </a>
                             <ul className="features-list">
-                                {plan.features.map((feature, i) => (
-                                    <li key={i}><CheckIcon /> {feature}</li>
+                                {plan.features.map((feature, fIndex) => (
+                                    <li key={fIndex} className={feature.included ? 'included' : 'excluded'}>
+                                        {feature.text}
+                                    </li>
                                 ))}
                             </ul>
+                        </div>
+                        <div className="card-footer">
+                             <button className="try-button">Try free for {plan.trialDays} days</button>
                         </div>
                     </div>
                 ))}
             </div>
-        </div>
+            
+            <div className="pricing-footer">
+                <p>
+                    Learn more about plans for professionals <a href="#">ⓘ</a>
+                </p>
+                <p className="disclaimer">
+                    Nexon, Inc. is registered for sales tax purposes in certain countries. As a result, depending on your location, a sales tax could be added to your final bill. ⓘ
+                </p>
+            </div>
+        </section>
     );
 }

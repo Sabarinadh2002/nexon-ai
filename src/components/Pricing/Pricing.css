@@ -1,102 +1,242 @@
 /* src/components/Pricing/Pricing.css */
+
 .pricing-section {
-    padding: 4rem 2rem;
+    width: 100vw;
+    padding: 6rem 2rem;
+    background-color: #0e1217;
+    color: white;
+    text-align: center;
+    
+    /* These two lines create the full-width effect */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     position: relative;
-    z-index: 10;
+    overflow: hidden; /* Keep the glow contained */
 }
 
+/* This is the container for the header content and the aurora */
+.pricing-header {
+    position: relative; /* This is essential for the aurora */
+    z-index: 2;
+    margin-bottom: 4rem;
+}
+
+/* --- THE NEW AURORA EFFECT --- */
+/* We apply the glow directly to the header's ::before pseudo-element */
+.pricing-header::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; /* Width of the glow */
+    height: 400px; /* Height of the glow */
+    background: 
+        radial-gradient(ellipse at 50% 50%, rgba(67, 56, 202, 0.4) 0%, transparent 70%);
+    filter: blur(100px);
+    z-index: -1; /* Place it BEHIND the header's text content */
+    opacity: 0.7;
+}
+
+.pricing-header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+}
+
+.billing-toggle {
+    display: inline-flex;
+    align-items: center;
+    background-color: #1c212c;
+    border-radius: 99px;
+    padding: 4px;
+}
+
+.billing-toggle button {
+    background: transparent;
+    border: none;
+    color: #a0aec0;
+    padding: 0.5rem 1rem;
+    border-radius: 99px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.billing-toggle button.active {
+    background-color: #384259;
+    color: white;
+}
+
+.save-badge {
+    background-color: #2563eb;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    margin-left: 1rem;
+}
+
+/* --- Styling for the grid and cards --- */
+
 .pricing-grid {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    max-width: 1280px;
+    position: relative; /* Ensure cards are above the main background */
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 .pricing-card {
-    background: #1A1A1A;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    width: 320px;
-    transform-style: preserve-3d;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.pricing-card:hover {
-    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-.pricing-card.featured {
-    border-color: #377DFF;
-    box-shadow: 0 0 25px -5px #377DFF;
-}
-
-.card-content {
+    background-color: #1c212c;
+    border-radius: 1rem;
     padding: 2rem;
-    color: white;
-}
-
-.plan-header {
+    text-align: left;
+    border: 1px solid #384259;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 }
 
-.plan-header h3 {
-    margin: 0;
+.pricing-card.popular {
+    border-color: #4f46e5;
+    box-shadow: 0 0 30px rgba(79, 70, 229, 0.5);
+}
+
+.card-header h3 {
     font-size: 1.25rem;
-}
-
-.featured-badge {
-    background: #377DFF;
-    color: white;
-    padding: 0.2rem 0.6rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
     font-weight: 600;
+    margin-bottom: 1rem;
 }
 
-.plan-price {
-    font-size: 3rem;
+.price {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.25rem;
+}
+
+.price-currency {
+    font-size: 1.5rem;
+    margin-right: 0.25rem;
+}
+
+.price-amount {
+    font-size: 2.5rem;
     font-weight: 700;
-    margin: 1.5rem 0;
-}
-.plan-price sup, .plan-price sub {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #A0AEC0;
 }
 
-.get-started-btn {
+.price-period {
+    font-size: 1.25rem;
+    color: #a0aec0;
+    margin-left: 0.25rem;
+}
+
+.billing-info {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-body {
+    flex-grow: 1;
+}
+
+.try-button {
     width: 100%;
-    background: #377DFF;
-    color: white;
-    border: none;
+    background-color: white;
+    color: #1c212c;
+    border: 1px solid white;
     padding: 0.8rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.3s, color 0.3s;
 }
-.get-started-btn:hover {
-    background: #2b6ad9;
+
+.try-button:hover {
+    background-color: transparent;
+    color: white;
+}
+
+.pay-link {
+    display: block;
+    font-size: 0.8rem;
+    color: #4f46e5;
+    text-decoration: underline;
+    margin: 0.75rem 0 2rem 0;
+    text-align: center;
 }
 
 .features-list {
     list-style: none;
     padding: 0;
-    margin-top: 1.5rem;
-    text-align: left;
+    margin: 0;
 }
+
 .features-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: #A0AEC0;
+    padding-left: 1.5rem;
+    position: relative;
     margin-bottom: 0.75rem;
+    color: #d1d5db;
 }
-.features-list li svg {
-    color: #377DFF;
+
+.features-list li::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+}
+
+.features-list li.included::before {
+    content: '✓';
+    color: #4ade80;
+}
+
+.features-list li.excluded::before {
+    content: '✗';
+    color: #ef4444;
+}
+
+.card-footer {
+    margin-top: 2rem;
+}
+
+.pricing-footer {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 4rem auto 0 auto;
+    font-size: 0.9rem;
+    color: #a0aec0;
+}
+
+.pricing-footer a {
+    color: white;
+    font-weight: 600;
+}
+
+.pricing-footer .disclaimer {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    color: #6b7280;
+}
+
+@media (max-width: 1200px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    .pricing-header h1 {
+        font-size: 2.5rem;
+    }
 }
