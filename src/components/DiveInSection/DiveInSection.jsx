@@ -1,38 +1,8 @@
-// src/components/DiveInSection/DiveInSection.jsx
 import React, { useEffect, useRef } from "react";
 import "./DiveInSection.css";
 
 const DiveInSection = () => {
   const rootRef = useRef(null);
-
-  // Scroll animation: add "is-visible" when elements enter the viewport
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const animatedElements = root.querySelectorAll("[data-w-id]");
-
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries, observerInstance) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observerInstance.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-
-      animatedElements.forEach((el) => observer.observe(el));
-
-      return () => observer.disconnect();
-    } else {
-      // Fallback: if IntersectionObserver is not supported, just show everything
-      animatedElements.forEach((el) => el.classList.add("is-visible"));
-    }
-  }, []);
 
   const projectData = [
     {
@@ -135,8 +105,89 @@ const DiveInSection = () => {
     },
   ];
 
+  // Scroll animation 1: fade-in for [data-w-id] (header + text blocks)
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const animatedElements = root.querySelectorAll("[data-w-id]");
+    if (!animatedElements.length) return;
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries, observerInstance) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observerInstance.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      animatedElements.forEach((el) => observer.observe(el));
+
+      return () => observer.disconnect();
+    } else {
+      animatedElements.forEach((el) => el.classList.add("is-visible"));
+    }
+  }, []);
+
+  // Scroll animation 2: sticky image swap when content blocks scroll
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const contentBlocks = root.querySelectorAll("[data-content-for]");
+    const imageContainer = root.querySelector(".home_dive-in-sticky-images");
+    if (!contentBlocks.length || !imageContainer) return;
+
+    const allImages = imageContainer.querySelectorAll(
+      ".home_dive-in-sticky-image"
+    );
+
+    // First image active by default
+    allImages.forEach((img, i) => {
+      img.classList.toggle("is-active", i === 0);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.dataset.contentFor;
+            const targetImage = imageContainer.querySelector(
+              `[data-image-for="${id}"]`
+            );
+
+            if (targetImage) {
+              allImages.forEach((img) => img.classList.remove("is-active"));
+              targetImage.classList.add("is-active");
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-40% 0px -40% 0px", // middle band of the viewport
+        threshold: 0,
+      }
+    );
+
+    contentBlocks.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [projectData]);
+
   const arrowSvg = (
-    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="8"
+      height="8"
+      viewBox="0 0 8 8"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path d="M0 0.5H8" stroke="white" />
       <path d="M7.5 0V8" stroke="white" />
       <path d="M7 1L0.5 7.5" stroke="white" />
@@ -148,63 +199,74 @@ const DiveInSection = () => {
       <div className="home_dive-in-inner">
         <div className="home_header-block is-work">
           <h2
-            data-w-id="c8573a9f-db0a-60df-b565-c03c441f5f45"
+            data-w-id="heading"
             className="heading_standard"
           >
             Dive into the <span className="span_gradient">work.</span>
           </h2>
           <p
-            data-w-id="c8573a9f-db0a-60df-b565-c03c441f5f49"
+            data-w-id="intro"
             className="work-paragraph"
           >
             As creatives ourselves, we know that what you really want to see is the work we've
-            actually put live. Here's a showcase of some of our recent projects, across a range of
-            sectors.
+            actually put live. Here's a showcase of some of our recent projects, across a range
+            of sectors.
           </p>
         </div>
 
         <div className="home_dive-in-list">
-          {projectData.map((project, index) => (
-            <div
-              key={index}
-              className="home_dive-in-row"
-              data-w-id={`row-${index}`}   /* this is what the effect targets */
-            >
-              <div className="home_dive-in_image">
+          <div className="home_dive-in-layout">
+            {/* Left: sticky image stack */}
+            <div className="home_dive-in-sticky-images">
+              {projectData.map((project, index) => (
                 <img
+                  key={index}
                   src={project.image}
                   loading="lazy"
                   sizes={project.imageSizes}
                   srcSet={project.imageSrcSet}
                   alt={project.title}
-                  className="image_normal"
+                  className="home_dive-in-sticky-image"
+                  data-image-for={`project-${index}`}
                 />
-              </div>
-
-              <div className="home_dive-in_content">
-                <div className="pill_list">
-                  {project.pills.map((pill, pillIndex) => (
-                    <div key={pillIndex} className="pill-item">
-                      <div className="pill-item-inner">{pill}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <h2 className="heading-style-h2 text-color-white">
-                  <a href={project.href}>{project.title}</a>
-                </h2>
-
-                <p>
-                  <a href={project.href}>{project.description}</a>
-                </p>
-
-                <a href={project.href} className="home_dive-in_link w-inline-block">
-                  <div>See full case study</div>
-                  <div className="home_dive-in_link-icon w-embed">{arrowSvg}</div>
-                </a>
-              </div>
+              ))}
             </div>
-          ))}
+
+            {/* Right: scrolling content blocks */}
+            <div className="home_dive-in-scrolling-content">
+              {projectData.map((project, index) => (
+                <div
+                  key={index}
+                  className="home_dive-in_content_block"
+                  data-content-for={`project-${index}`}
+                  data-w-id={`content-row-${index}`}
+                >
+                  <div className="pill_list">
+                    {project.pills.map((pill, pillIndex) => (
+                      <div key={pillIndex} className="pill-item">
+                        <div className="pill-item-inner">{pill}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <h2 className="heading-style-h2 text-color-white">
+                    <a href={project.href}>{project.title}</a>
+                  </h2>
+
+                  <p>
+                    <a href={project.href}>{project.description}</a>
+                  </p>
+
+                  <a href={project.href} className="home_dive-in_link w-inline-block">
+                    <div>See full case study</div>
+                    <div className="home_dive-in_link-icon w-embed">
+                      {arrowSvg}
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
